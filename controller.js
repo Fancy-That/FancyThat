@@ -15,7 +15,7 @@ app.controller("tCatalogue", function($scope, $http, $interval){
 		$scope.search=new $scope.FuzzySearch($scope.items,$scope.fuzzyConfig);
 		$scope.categoriesSet=new Set(["All"]);
 		let gram=new nGrams("text",6);
-		$scope.items.forEach(w=>{w.category?$scope.categoriesSet.add(w.category):0;w.image+="./catalogueItems/";w.description?0:w.description=gram.generateOutput(200)});
+		$scope.items.forEach(w=>{w.category?$scope.categoriesSet.add(w.category):0;w.image+="/catalogueItems/";w.description?0:w.description=gram.generateOutput(200)});
 		$scope.categories=Array.from($scope.categoriesSet);
 		$scope.category=$scope.categories[0];
 	});
