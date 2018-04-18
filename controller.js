@@ -31,6 +31,6 @@ app.controller("tCatalogue", function($scope, $http, $interval){
 		document.getElementById('bigImage').style.display='block';
 		let i=document.getElementById('bigImageImage');
 		i.src=imageSrc;
-		i.naturalHeight>(i.naturalWidth?i.height=window.innerHeight*0.8,i.width=(i.height/i.naturalHeight)*i.naturalWidth):(i.width=window.innerWidth*0.65,i.height=(i.width/i.naturalWidth)*i.naturalHeight);
+		if(i.naturalHeight>i.naturalWidth)i.height=window.innerHeight*0.8,i.width=(i.height/i.naturalHeight)*i.naturalWidth else i.width=window.innerWidth*0.65,i.height=(i.width/i.naturalWidth)*i.naturalHeight;
 	};
 });
