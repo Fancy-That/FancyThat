@@ -9,22 +9,28 @@ app.controller("tCatalogue", function($scope, $http, $interval){
 	$scope.fuzzyConfig={keys:[{name:"name",weight:7},{name:"description",weight:1}],delimiter:" ",lowerCase:true,minWordLength:0};
 	let nGrams=function nGrams(c,o,g={},x=this,y=(_,$,a)=>_.substring($,a),q=_=>Math.random()*_|0,h=_=>_.length,_=(_,i=0,r)=>{_=y(c,_,h(c)-_);for(;i<h(_)-o;i++){r=y(_,i,i+o);r in g?0:g[r]=[];g[r].push(_.charAt(i+o))}}){x.generateOutput=(_,$=q(h(c)),i=0,p,a=y(c,$,$+o))=>{for(;i<_-o;i++)(p=g[y(a,i,i+o)])&(p?a+=p[q(h(p))]:i=_);return a},x.appendToCorpus=t=>(c+=t)&_(h(c)),x.reset=r=>{c="",g={}};_(0)};
 	//
-	$http.get("./catalogueItems/info.json").then(function(res){
-		$scope.items=res.data;
-		$scope.visibleItems=$scope.items;
-		$scope.search=new $scope.FuzzySearch($scope.items,$scope.fuzzyConfig);
-		$scope.categoriesSet=new Set(["All"]);
-		let gram=new nGrams("text",6);
-		$scope.items.forEach(w=>{w.category?$scope.categoriesSet.add(w.category):0;w.image="./catalogueItems/"+w.image;w.description?0:w.description=gram.generateOutput(200)});
-		$scope.categories=Array.from($scope.categoriesSet);
-		$scope.category=$scope.categories[0];
+	
+	$http.get("./corpus.txt").then(function(res){
+		$scope.corpus=res.data;
+		$http.get("./catalogueItems/info.json").then(function(res){
+			$scope.items=res.data;
+			$scope.visibleItems=$scope.items;
+			$scope.search=new $scope.FuzzySearch($scope.items,$scope.fuzzyConfig);
+			$scope.categoriesSet=new Set(["All"]);
+			let gram=new nGrams($scope.corpus,6);
+			$scope.items.forEach(w=>{w.category?$scope.categoriesSet.add(w.category):0;w.image="./catalogueItems/"+w.image;w.description?0:w.description=gram.generateOutput(200)});
+			$scope.categories=Array.from($scope.categoriesSet);
+			$scope.category=$scope.categories[0];
+		});
 	});
+	
+	
 	// Stolen from WilliamSandyToes
 	document.title="Catalogue";
 	$interval(function(){
 		if($scope.oFez==$scope.fez&&$scope.oCategory==$scope.category)return;$scope.visibleItems=[];
 		if(!$scope.fez)$scope.items.forEach(w=>w.category==$scope.category||$scope.category=="All"?$scope.visibleItems.push(w):0);
-		else $scope.search.search($scope.fez).forEach(w=>w.result.category==$scope.category||$scope.category=="All"?$scope.visibleItems.push(w.result):0);
+		else $scope.search.search($scope.fez.toLowerCase()).forEach(w=>w.result.category==$scope.category||$scope.category=="All"?$scope.visibleItems.push(w.result):0);
 		$scope.oFez=$scope.fez;$scope.oCategory=$scope.category;},50);
 		
 	$scope.bigImage = function(imageSrc){
