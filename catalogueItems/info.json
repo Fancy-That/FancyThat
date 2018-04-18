@@ -9,7 +9,7 @@
 	{
 		"name":"Banana",
 		"price":"9.99",
-		"description":"Description",
+		"description":"",
 		"image":"banana-dog.jpg",
 		"category":"Dog"
 	},
