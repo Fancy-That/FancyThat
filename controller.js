@@ -1,12 +1,12 @@
 app.controller("tController", function($scope){});
 
-app.controller("tHome", function($scope, $interval){document.title="Home";});
-app.controller("tContact", function($scope){
+app.controller("tHome", function($scope){document.title="Home";});
+app.controller("tContact", function($scope, $interval){
 	document.title="Contact";
 	$scope.validName=$scope.validEmail=true;
 	$interval(function(){
 		if($scope.oName!=$scope.name){
-			$scope.name?$scope.validName=true:0;
+			$scope.validName=$scope.name?1:0;
 			for(x in"0123456789!\\\"£$%^&*()_+={[}]:;@'~#<,>?/`¬|"){if($scope.name.indexOf(x)>-1){$scope.validName=false;break;}}$scope.oName=$scope.name;
 		}
 		if($scope.oEmail!=$scope.email){
