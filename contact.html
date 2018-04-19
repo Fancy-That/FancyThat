@@ -17,7 +17,7 @@
 				<div class="w3-col"  style="width:30%;">
 					<input ng-model="name"class="w3-input w3-small" name="uName" type="text" placeholder="Name" />
 				</div>
-				<div w3-hide="validName">
+				<div ng-hide="validName">
 					Invalid Name
 				</div>
 			</div>
@@ -29,7 +29,7 @@
 				<div class="w3-col"  style="width:30%;">
 					<input ng-model="email"class="w3-input w3-small" name="uEmail" type="email" placeholder="Email address" />
 				</div>
-				<div w3-hide="validEmail">
+				<div ng-hide="validEmail">
 					Invalid Email
 				</div>
 			</div>
