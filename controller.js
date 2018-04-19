@@ -10,8 +10,7 @@ app.controller("tContact", function($scope, $interval){
 			for(x in"0123456789!\\\"£$%^&*()_+={[}]:;@'~#<,>?/`¬|"){if($scope.name.indexOf(x)>-1){$scope.validName=false;break;}}$scope.oName=$scope.name;
 		}
 		if($scope.oEmail!=$scope.email){
-			$scope.validEmail=true;
-			for(x in ""){}
+			$scope.validEmail=/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test($scope.email);
 		}
 	},50);
 });
