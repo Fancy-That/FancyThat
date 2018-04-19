@@ -11,7 +11,7 @@ app.controller("tContact", function($scope){
 		}
 		if($scope.oEmail!=$scope.email){
 			$scope.validEmail=true;
-			for(x in "")
+			for(x in ""){}
 		}
 	},50);
 });
