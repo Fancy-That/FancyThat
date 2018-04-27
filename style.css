@@ -1,6 +1,1 @@
-html, body, h1, h2, h3, h4, h5, h6, p{font-family: 'Montserrat', sans-serif;};
-.title p{font-size: 22px;}
-.standard p{font-size: 16px;}
-.description p{font-size: 13px;}
-.coastal{background-color:#dff9fb;}
-.icePack{background-color:#c7ecee;}
+body,h1,h2,h3,h4,h5,h6,html,p{font-family:Montserrat,sans-serif}.title p{font-size:22px}.standard p{font-size:16px}.description p{font-size:13px}.coastal{background-color:#dff9fb}.icePack{background-color:#c7ecee}
